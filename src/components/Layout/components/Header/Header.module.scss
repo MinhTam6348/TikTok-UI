@@ -4,11 +4,16 @@
     --search-top-space: 9px;
     --search-button-width: 52px;
 
+    position: fixed;
+    top: 0;
+    left: 0;
+    z-index: 10;
+    justify-content: center;
+    display: flex;
+    box-shadow: 0px 1px 1px rgb(0 0 0 / 12%);
     height: var(--default-layout-header-height);
     width: 100%;
-    box-shadow: 0px 1px 1px rgb(0 0 0 / 12%);
-    display: flex;
-    justify-content: center;
+    background-color: var(--white);
 }
 
 .inner {
@@ -38,6 +43,7 @@
 }
 
 .action-btn {
+    position: relative;
     font-size: 2.2rem;
     background-color: transparent;
     color: #161823;
