@@ -9,6 +9,7 @@ import classNames from 'classnames/bind';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { useEffect, useRef, useState } from 'react';
 import { useDebounce } from '~/hooks';
+import SearchApi from '~/apiServices/searchApi';
 
 const cx = classNames.bind(styles);
 
@@ -32,20 +33,30 @@ function Search() {
         setShowResult(false);
     };
 
+    const handlerChange = (e) => {
+        const searchvalue = e.target.value;
+        if (!searchvalue.startsWith(' ')) {
+            setSearchValue(searchvalue);
+        }
+    };
+
     useEffect(() => {
         if (!searchValue.trim()) {
             searchResult([]);
             return;
         }
 
-        setLoading(true);
+        const fetchApi = async () => {
+            setLoading(true);
 
-        fetch(`https://tiktok.fullstack.edu.vn/api/users/search?q=${encodeURIComponent(debounce)}&type=less`)
-            .then((res) => res.json())
-            .then((res) => setSearchResult(res.data))
-            .catch(() => {
-                setLoading(false);
-            });
+            const result = await SearchApi(debounce);
+            setSearchResult(result);
+
+            setLoading(false);
+        };
+
+        fetchApi();
+        // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [debounce]);
 
     return (
@@ -70,7 +81,7 @@ function Search() {
                     value={searchValue}
                     placeholder="Search account and video"
                     spellCheck={false}
-                    onChange={(e) => setSearchValue(e.target.value)}
+                    onChange={handlerChange}
                     onFocus={() => setShowResult(true)}
                 />
                 {!!searchValue && !loading && (
@@ -80,7 +91,7 @@ function Search() {
                 )}
                 {loading && <FontAwesomeIcon className={cx('loading')} icon={faSpinner} />}
 
-                <button className={cx('search-btn')}>
+                <button className={cx('search-btn')} onMouseDown={(e) => e.preventDefault}>
                     <SearchIcon />
                 </button>
             </div>
