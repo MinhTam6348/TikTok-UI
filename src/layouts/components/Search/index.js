@@ -9,7 +9,7 @@ import classNames from 'classnames/bind';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { useEffect, useRef, useState } from 'react';
 import { useDebounce } from '~/hooks';
-import SearchApi from '~/apiServices/searchApi';
+import SearchApi from '~/services/searchApi';
 
 const cx = classNames.bind(styles);
 
