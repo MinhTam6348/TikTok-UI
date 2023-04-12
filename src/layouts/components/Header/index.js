@@ -121,11 +121,7 @@ function Header() {
                     ) : (
                         <>
                             <Button text>Upload</Button>
-                            <Button text>Message</Button>
-                            <Button text>Inbox</Button>
-                            <Button primary onClick={() => alert('click')}>
-                                Log in
-                            </Button>
+                            <Button primary>Log in</Button>
                         </>
                     )}
                     <Menu items={currentUser ? userMenu : MENU_ITEMS} onChange={handlerMenuChange}>
