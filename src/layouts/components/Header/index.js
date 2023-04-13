@@ -96,7 +96,7 @@ function Header() {
                     <img src={images.logo} alt="Tiktok" />
                 </Link>
 
-                <Search />
+                {/* <Search /> */}
 
                 <div className={cx('action')}>
                     {currentUser ? (
